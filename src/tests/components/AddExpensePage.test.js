@@ -1,0 +1,33 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+import { AddExpensePage } from '../../components/AddExpensePage';
+import expenses from '../fixtures/test-expenses-data';
+
+//instead of using the same code in each test cases we will use globals docs: https://jestjs.io/docs/api 
+let startAddExpense, history, wrapper;
+
+beforeEach(()=>{
+    startAddExpense = jest.fn();
+    history = { push: jest.fn() };
+    wrapper = shallow(<AddExpensePage startAddExpense={startAddExpense} history={history} />);
+}); //runs a function before each of the tests in the file runs.
+
+test('should render AddExpensePage correctly', ()=>{
+    // const onSubmit = jest.fn();
+    // const history = { push: jest.fn() };
+    // const wrapper = shallow(<AddExpensePage onSubmit={onSubmit} history={history} />);
+    expect(wrapper).toMatchSnapshot();
+});
+
+/* test('should handle onSubmit', ()=>{
+    const onSubmit = jest.fn();
+    const history = { push: jest.fn() };
+
+    const navigate = { navigate: jest.fn()}
+
+    // use navigate
+    const wrapper = shallow(<AddExpensePage onSubmit={onSubmit} navigate={navigate} />);
+    wrapper.find('ExpenseForm').prop('onSubmit')(expenses[1]);
+    expect(jest.fn()).toHaveBeenLastCalledWith('/');
+    //expect(startAddExpense).toHaveBeenLastCalledWith(expenses[1]);
+}); */
